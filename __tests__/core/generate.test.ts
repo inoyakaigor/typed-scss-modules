@@ -37,7 +37,7 @@ describeAllImplementations((implementation) => {
         },
       });
 
-      expect(fs.writeFileSync).toHaveBeenCalledTimes(9);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(8);
     });
   });
 });
