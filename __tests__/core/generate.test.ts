@@ -28,9 +28,16 @@ describeAllImplementations((implementation) => {
         logLevel: "verbose",
         outputFolder: null,
         allowArbitraryExtensions: false,
+        aliases: {
+          "~fancy-import": "complex",
+          "~another": "style",
+        },
+        aliasPrefixes: {
+          "~": "nested-styles/",
+        },
       });
 
-      expect(fs.writeFileSync).toHaveBeenCalledTimes(6);
+      expect(fs.writeFileSync).toHaveBeenCalledTimes(9);
     });
   });
 });

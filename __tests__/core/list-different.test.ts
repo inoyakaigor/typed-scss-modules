@@ -7,6 +7,7 @@ describeAllImplementations((implementation) => {
 
     beforeEach(() => {
       console.log = jest.fn();
+      console.warn = jest.fn();
       exit = jest.spyOn(process, "exit").mockImplementation();
     });
 
@@ -42,10 +43,10 @@ describeAllImplementations((implementation) => {
       });
 
       expect(exit).toHaveBeenCalledWith(1);
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`[INVALID TYPES] Check type definitions for`)
       );
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`invalid.scss`)
       );
     });
@@ -71,8 +72,8 @@ describeAllImplementations((implementation) => {
         allowArbitraryExtensions: false,
       });
 
-      expect(console.log).toHaveBeenCalledTimes(1);
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`Only 1 file found for`)
       );
       expect(exit).not.toHaveBeenCalled();
@@ -99,6 +100,7 @@ describeAllImplementations((implementation) => {
       });
 
       expect(exit).not.toHaveBeenCalled();
+      expect(console.warn).not.toHaveBeenCalled();
       expect(console.log).not.toHaveBeenCalled();
     });
 
@@ -123,12 +125,12 @@ describeAllImplementations((implementation) => {
       });
 
       expect(exit).toHaveBeenCalledWith(1);
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(
           `[INVALID TYPES] Type file needs to be generated for`
         )
       );
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`no-generated.scss`)
       );
     });
@@ -154,8 +156,8 @@ describeAllImplementations((implementation) => {
       });
 
       expect(exit).not.toHaveBeenCalled();
-      expect(console.log).toHaveBeenCalledTimes(1);
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`No files found`)
       );
     });

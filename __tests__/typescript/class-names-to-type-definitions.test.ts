@@ -9,7 +9,7 @@ const file = join(__dirname, "test.d.ts");
 
 describe("classNamesToTypeDefinitions (without Prettier)", () => {
   beforeEach(() => {
-    console.log = jest.fn();
+    console.warn = jest.fn();
   });
 
   describe("named", () => {
@@ -46,7 +46,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual("export declare const myClass: string;\n");
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`[SKIPPING] 'if' is a reserved keyword`)
       );
     });
@@ -60,7 +60,7 @@ describe("classNamesToTypeDefinitions (without Prettier)", () => {
       });
 
       expect(definition).toEqual("export declare const myClass: string;\n");
-      expect(console.log).toHaveBeenCalledWith(
+      expect(console.warn).toHaveBeenCalledWith(
         expect.stringContaining(`[SKIPPING] 'invalid-variable' contains dashes`)
       );
     });
